@@ -60,6 +60,13 @@ spec:
         securityContext:
           allowPrivilegeEscalation: true
           privileged: true
+      - name: "volume-permissions"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: "Always"
+        command: ["chown", "elasticsearch:elasticsearch", "/usr/share/elasticsearch/data"]
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: es-data
       containers:
       - name: elasticsearch
         env:
