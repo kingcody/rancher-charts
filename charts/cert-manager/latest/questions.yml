@@ -41,3 +41,41 @@ questions:
   description: "Let's Encrypt register email, for https://letsencrypt.org/docs/staging-environment"
   label: Let's Encrypt Client Register Email
   group: "Settings"
+
+- variable: ingressShim.defaultACMEChallengeType
+  default: "http01"
+  required: true
+  type: enum
+  label: Let's Encrypt ACME Challenge Type
+  group: "Challenge Settings"
+  options:
+  - "http01"
+  - "dns01"
+- variable: ingressShim.defaultACMEDNS01ChallengeProviderType
+  default: "route53"
+  required: true
+  type: enum
+  show_if: "ingressShim.defaultACMEChallengeType=dns01"
+  label: Let's Encrypt ACME DNS Challenge Provider
+  group: "Challenge Settings"
+  options:
+  - "route53"
+  subquestions:
+  - variable: ingressShim.defaultACMEDNS01ChallengeProviderConfig.accessKeyID
+    default: ""
+    required: true
+    type: string
+    show_if: "ingressShim.defaultACMEDNS01ChallengeProviderType=route53"
+    label: "Route53 IAM Access Key ID"
+  - variable: ingressShim.defaultACMEDNS01ChallengeProviderConfig.secretAccessKeySecretRef.name
+    default: ""
+    required: true
+    type: string
+    show_if: "ingressShim.defaultACMEDNS01ChallengeProviderType=route53"
+    label: "Route53 IAM Access Key Secret Name"
+  - variable: ingressShim.defaultACMEDNS01ChallengeProviderConfig.secretAccessKeySecretRef.key
+    default: ""
+    required: true
+    type: string
+    show_if: "ingressShim.defaultACMEDNS01ChallengeProviderType=route53"
+    label: "Route53 IAM Access Key Secret Key"

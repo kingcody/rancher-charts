@@ -56,7 +56,7 @@ spec:
           {{- if .defaultACMEChallengeType }}
           - --default-acme-issuer-challenge-type={{ .defaultACMEChallengeType }}
           {{- end }}
-          {{- if .defaultACMEDNS01ChallengeProvider }}
+          {{- if eq .defaultACMEChallengeType "dns01" }}
           - --default-acme-issuer-dns01-provider-name={{ .defaultACMEDNS01ChallengeProvider }}
           {{- end }}
           {{- end }}

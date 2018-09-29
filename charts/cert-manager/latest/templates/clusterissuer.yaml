@@ -20,5 +20,22 @@ spec:
     email: {{ .Values.letsencrypt.email }}
     privateKeySecretRef:
       name: {{ .Values.ingressShim.defaultIssuerName }}-account-key
+    {{- if eq .Values.ingressShim.defaultACMEChallengeType "http01" }}
     http01: {}
+    {{- else if eq .Values.ingressShim.defaultACMEChallengeType "dns01" }}
+    dns01:
+      providers:
+      - name: dns01-default
+        {{- $providerType := .Values.ingressShim.defaultACMEDNS01ChallengeProviderType -}}
+        {{- with .Values.ingressShim.defaultACMEDNS01ChallengeProviderConfig }}
+        {{- if eq $providerType "route53" }}
+        route53:
+          region: us-east-1
+          accessKeyID: {{ accessKeyID }}
+          secretAccessKeySecretRef:
+            name: {{ secretAccessKeySecretRef.name }}
+            key: {{ secretAccessKeySecretRef.key }}
+        {{- end -}}
+        {{- end -}}
+    {{- end -}}
 {{- end -}}
