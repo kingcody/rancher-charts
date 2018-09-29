@@ -160,6 +160,13 @@ questions:
     type: password
     group: "Grafana Settings"
     label: Grafana Admin Password
+  - variable: grafana.auth.anonymous.enabled
+    default: "false"
+    description: "Allow anonymous users to view the grafana dashboard"
+    type: boolean
+    group: "Grafana Settings"
+    label: Allow Anonymous Users
+    required: true
 - variable: grafana.ingress.enabled
   default: "true"
   description: "Expose grafana using Layer 7 Load Balancer - ingress"
