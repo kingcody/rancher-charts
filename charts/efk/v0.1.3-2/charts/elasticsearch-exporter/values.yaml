@@ -27,6 +27,11 @@ tolerations: {}
 
 podAnnotations: {}
 
+# use configmap for its env configmap
+envConfigMap:
+  enabled: false
+  # name:  elasticsearch-exporter
+
 service:
   type: ClusterIP
   httpPort: 9108

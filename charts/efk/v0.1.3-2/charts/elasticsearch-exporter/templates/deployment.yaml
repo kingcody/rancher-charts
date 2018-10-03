@@ -71,6 +71,16 @@ spec:
             readOnlyRootFilesystem: true
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+          {{- if .Values.envConfigMap.enabled }}
+          # Define the environment variable
+          envFrom:
+          - configMapRef:
+              {{- if .Values.envConfigMap.name }}
+              name: {{ .Values.envConfigMap.name }}
+              {{- else }}
+              name: {{ .Release.Name }}-elasticsearch-exporter
+              {{- end }}
+          {{- end }}
           ports:
             - containerPort: {{ .Values.service.httpPort }}
               name: http
