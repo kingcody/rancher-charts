@@ -85,7 +85,7 @@ elasticsearch-exporter:
   tolerations: {}
 
   podAnnotations:
-    prometheus.io/scrape: true
+    prometheus.io/scrape: "true"
     prometheus.io/port: "9108"
 
   # use configmap for its env configmap
