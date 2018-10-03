@@ -49,8 +49,8 @@ questions:
   required: true
   group: "elasticsearch"
   options:
-  - "512m" 
-  - "1g" 
+  - "512m"
+  - "1g"
   - "2g"
 - variable: elasticsearch.master.service.type
   default: "NodePort"
@@ -82,6 +82,14 @@ questions:
     required: true
     type: string
     label: Elasticsearch Persistent Volume Size
+# elasticsearch-exporter settings:
+- variable: elasticsearch-exporter.enabled
+  default: true
+  group: "ElasticSearch-Exporter"
+  description: "Enable ElasticSearch Exporter for Prometheus"
+  type: boolean
+  label: Enable ElasticSearch-Exporter
+  required: true
 # kibana settings
 - variable: kibana.ingress.enabled
   default: true
