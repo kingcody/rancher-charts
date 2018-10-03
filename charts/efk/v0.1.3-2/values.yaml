@@ -86,7 +86,7 @@ elasticsearch-exporter:
 
   podAnnotations:
     prometheus.io/scrape: true
-    prometheus.io/port: 9108
+    prometheus.io/port: "9108"
 
   # use configmap for its env configmap
   envConfigMap:
